@@ -11,14 +11,14 @@ const Auth = createStackNavigator();
 const AuthRoutes: React.FC = () => (
     <Auth.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
         cardStyle: { backgroundColor: '#F5FFFA' },
       }}
     >
       <Auth.Screen name="Dashboard" component={Dashboard} />
-      <Auth.Screen name="Patient" component={Patient} />
-      <Auth.Screen name="Physician" component={Physician} />
-      <Auth.Screen name="Appointment" component={Appointment} />
+      <Auth.Screen name="Pacientes" component={Patient} />
+      <Auth.Screen name="Médicos" component={Physician} />
+      <Auth.Screen name="Agendamentos" component={Appointment} />
     </Auth.Navigator>
   );
   

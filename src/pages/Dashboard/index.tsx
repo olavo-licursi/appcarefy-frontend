@@ -16,11 +16,12 @@ const Patient: React.FC = () => {
         <Container>
             <Image source={logoImg} />
             <Title>Seja Bem-Vindo(a)!</Title>
-            <Button onPress={() => navigation.navigate('Patient')}>Pacientes</Button>
-            <Button onPress={() => {console.log('Funcionando')}}>Médicos(as)</Button>
-            <Button onPress={() => {console.log('Funcionando')}}>Consultas</Button>
+            <Button onPress={() => navigation.navigate('Pacientes')}>Pacientes</Button>
+            <Button onPress={() => navigation.navigate('Médicos')}>Médicos(as)</Button>
+            <Button onPress={() => navigation.navigate('Agendamentos')}>Agendamentos</Button>
         </Container>
     );
 }
+
 
 export default Patient;
