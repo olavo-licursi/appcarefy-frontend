@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 
-export const Container = styled.View``;
+export const Container = styled.View`
+    flex:1;
+`;
 
 export const AddPatientButton = styled.TouchableOpacity`
     position: absolute;
@@ -21,23 +23,6 @@ export const AddPatientButtonText = styled.Text`
     font-size: 18px;
     font-family: 'RobotoSlab-Regular';
     margin-left: 16px;
-`;
-
-export const RemovePatientButton = styled.TouchableOpacity`
-    background-color: red;
-    margin: 20px;
-    margin-right: 15px;
-    height: 40px;
-    border-radius: 4px;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-`;
-
-export const RemovePatientButtonText = styled.Text`
-    font-weight: bold;
-    font-size: 16px;
-    font-family: 'RobotoSlab-Regular';
 `;
 
 export const ContainerList = styled.View`

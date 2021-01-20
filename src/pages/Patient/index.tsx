@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {KeyboardAvoidingView, Platform, ScrollView, FlatList, View, Text, TouchableOpacity} from 'react-native';
+import {KeyboardAvoidingView, Platform, FlatList} from 'react-native';
 
 import api from "../../services/api";
 
 import Input from '../../components/Input';
 
 
-import { Container, AddPatientButton, AddPatientButtonText, RemovePatientButton, RemovePatientButtonText, ContainerList, PatientNameText } from './styles';
+import { Container, AddPatientButton, AddPatientButtonText, ContainerList, PatientNameText } from './styles';
+import RemoveButtonList from '../../components/RemoveButtonList';
+import EditPersonButton from '../../components/EditPersonButton';
 
 const Dashboard: React.FC = () => {
     const [patients, setPatients] = useState<any[]>([])
@@ -44,15 +46,19 @@ const Dashboard: React.FC = () => {
                     keyExtractor={patient => String(patient.id)}
                     renderItem={({ item: patient}) => (  
                         <ContainerList>
-                        <PatientNameText>{patient.name}</PatientNameText>    
+                        <PatientNameText>{patient.name}</PatientNameText>
 
-                        <RemovePatientButton
+                        <EditPersonButton 
+                        activeOpacity={0.6}
+                        onPress={() => {}}
+                        />    
+
+                        <RemoveButtonList
                               activeOpacity={0.6}
                               onPress={() => handleRemovePatient(patient.id)}
-                              >
-                                  <RemovePatientButtonText>Remover</RemovePatientButtonText>
-                              </RemovePatientButton>      
-                              </ContainerList>                           
+                              />
+                             
+                        </ContainerList>                           
                         )}
                         
                         
