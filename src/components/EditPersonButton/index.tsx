@@ -1,15 +1,14 @@
 import React from 'react';
-import { RectButtonProperties } from'react-native-gesture-handler';
+import { RectButtonProperties } from 'react-native-gesture-handler';
 
 import { Container, Icon } from './styles';
 
-interface ButtonProps extends RectButtonProperties{
-}
+type ButtonProps = RectButtonProperties;
 
-const Button: React.FC<ButtonProps> = ({...rest}) => (
-    <Container {...rest}>
-        <Icon name='user' size={20} color ='#000000' />
-    </Container>
+const Button: React.FC<ButtonProps> = ({ ...rest }) => (
+  <Container {...rest}>
+    <Icon name="user" size={20} color="#000000" />
+  </Container>
 );
 
 export default Button;

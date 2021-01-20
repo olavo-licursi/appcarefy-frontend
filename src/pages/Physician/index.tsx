@@ -1,77 +1,73 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
-import {KeyboardAvoidingView, Platform, FlatList} from 'react-native';
+import { KeyboardAvoidingView, Platform, FlatList } from 'react-native';
 
-import api from "../../services/api";
+import api from '../../services/api';
 
 import Input from '../../components/Input';
 
-import { Container, AddPatientButton, AddPatientButtonText, ContainerList, PatientNameText } from './styles';
+import {
+  Container,
+  AddPatientButton,
+  AddPatientButtonText,
+  ContainerList,
+  PatientNameText,
+} from './styles';
 import RemoveButtonList from '../../components/RemoveButtonList';
 import EditPersonButton from '../../components/EditPersonButton';
 
 const Physician: React.FC = () => {
-    const [physicians, setPhysicians] = useState<any[]>([])
+  const [physicians, setPhysicians] = useState<any[]>([]);
 
-    useEffect(() => {
-        api.get('/physicians').then(response => {
-          console.log(response.data);
-          setPhysicians(response.data);
-        });
-      }, []);
+  useEffect(() => {
+    api.get('/physicians').then(response => {
+      console.log(response.data);
+      setPhysicians(response.data);
+    });
+  }, []);
 
-      async function handleRemovePhysician(id){
-        await api.delete(`/physicians/${id}`);
+  async function handleRemovePhysician(id) {
+    await api.delete(`/physicians/${id}`);
 
-        const newPhysicians = physicians.filter(
-            physician => physician.id !== id
-        )
+    const newPhysicians = physicians.filter(physician => physician.id !== id);
 
-        setPhysicians(newPhysicians);
-      }
+    setPhysicians(newPhysicians);
+  }
 
-    return(
-        <>
-        <KeyboardAvoidingView
+  return (
+    <>
+      <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         enabled
-        >
+      >
+        <Container>
+          <Input name="search" icon="search" placeholder="Buscar" />
 
-                <Container>
-                    <Input name="search" icon="search" placeholder="Buscar" />
+          <FlatList
+            data={physicians}
+            keyExtractor={physician => String(physician.id)}
+            renderItem={({ item: physician }) => (
+              <ContainerList>
+                <PatientNameText>{physician.name}</PatientNameText>
 
-                    <FlatList 
-                    data={physicians}
-                    keyExtractor={physician => String(physician.id)}
-                    renderItem={({ item: physician}) => (  
-                        <ContainerList>
-                        <PatientNameText>{physician.name}</PatientNameText>
+                <EditPersonButton activeOpacity={0.6} onPress={() => {}} />
 
-                        <EditPersonButton 
-                        activeOpacity={0.6}
-                        onPress={() => {}}
-                        />    
+                <RemoveButtonList
+                  activeOpacity={0.6}
+                  onPress={() => handleRemovePhysician(physician.id)}
+                />
+              </ContainerList>
+            )}
+          />
+        </Container>
+      </KeyboardAvoidingView>
 
-                        <RemoveButtonList
-                              activeOpacity={0.6}
-                              onPress={() => handleRemovePhysician(physician.id)}
-                              />
-                             
-                        </ContainerList>                           
-                        )}
-                        
-                        
-                    />
-
-                </Container>
-        </KeyboardAvoidingView>
-
-        <AddPatientButton>
+      <AddPatientButton>
         <AddPatientButtonText>Adicionar Médico</AddPatientButtonText>
-        </AddPatientButton>
-        </>
-    );
-}
+      </AddPatientButton>
+    </>
+  );
+};
 
 export default Physician;
