@@ -6,7 +6,6 @@ export const Container = styled.View`
 `;
 
 export const AddPatientButton = styled.TouchableOpacity`
-  position: absolute;
   left: 0;
   bottom: 0;
   right: 0;
@@ -28,7 +27,7 @@ export const AddPatientButtonText = styled.Text`
 export const ContainerList = styled.View`
   flex-direction: row;
   margin-bottom: 1px;
-  background-color: #dcdcdc;
+  background-color: #F5FFFA;
   align-items: center;
 `;
 

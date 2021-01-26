@@ -7,7 +7,7 @@ type ButtonProps = RectButtonProperties;
 
 const Button: React.FC<ButtonProps> = ({ ...rest }) => (
   <Container {...rest}>
-    <Icon name="user" size={20} color="#000000" />
+    <Icon name="user-check" size={20} color="#000000" />
   </Container>
 );
 

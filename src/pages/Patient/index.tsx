@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { KeyboardAvoidingView, Platform, FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import api from '../../services/api';
 
@@ -7,20 +8,19 @@ import Input from '../../components/Input';
 
 import {
   Container,
-  AddPatientButton,
-  AddPatientButtonText,
   ContainerList,
   PatientNameText,
 } from './styles';
 import RemoveButtonList from '../../components/RemoveButtonList';
 import EditPersonButton from '../../components/EditPersonButton';
+import BottomButton from '../../components/BottomButton';
 
 const Dashboard: React.FC = () => {
+  const navigation = useNavigation();
   const [patients, setPatients] = useState<any[]>([]);
 
   useEffect(() => {
     api.get('/patients').then(response => {
-      console.log(response.data);
       setPatients(response.data);
     });
   }, []);
@@ -41,7 +41,7 @@ const Dashboard: React.FC = () => {
         enabled
       >
         <Container>
-          <Input name="search" icon="search" placeholder="Buscar" />
+          <Input name="search" placeholder="Buscar"/>
 
           <FlatList
             data={patients}
@@ -62,9 +62,9 @@ const Dashboard: React.FC = () => {
         </Container>
       </KeyboardAvoidingView>
 
-      <AddPatientButton>
-        <AddPatientButtonText>Adicionar Paciente</AddPatientButtonText>
-      </AddPatientButton>
+      <BottomButton onPress={() => navigation.navigate('Formularios Pacientes')}>
+        Adicionar Paciente
+      </BottomButton>
     </>
   );
 };

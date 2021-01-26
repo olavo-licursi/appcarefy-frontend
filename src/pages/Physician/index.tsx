@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
 import { KeyboardAvoidingView, Platform, FlatList } from 'react-native';
+import BottomButton from '../../components/BottomButton';
+import { useNavigation } from '@react-navigation/native';
 
 import api from '../../services/api';
 
@@ -8,8 +9,6 @@ import Input from '../../components/Input';
 
 import {
   Container,
-  AddPatientButton,
-  AddPatientButtonText,
   ContainerList,
   PatientNameText,
 } from './styles';
@@ -17,11 +16,11 @@ import RemoveButtonList from '../../components/RemoveButtonList';
 import EditPersonButton from '../../components/EditPersonButton';
 
 const Physician: React.FC = () => {
+  const navigation = useNavigation();
   const [physicians, setPhysicians] = useState<any[]>([]);
 
   useEffect(() => {
     api.get('/physicians').then(response => {
-      console.log(response.data);
       setPhysicians(response.data);
     });
   }, []);
@@ -42,7 +41,7 @@ const Physician: React.FC = () => {
         enabled
       >
         <Container>
-          <Input name="search" icon="search" placeholder="Buscar" />
+          <Input name="search" placeholder="Buscar" />
 
           <FlatList
             data={physicians}
@@ -63,9 +62,9 @@ const Physician: React.FC = () => {
         </Container>
       </KeyboardAvoidingView>
 
-      <AddPatientButton>
-        <AddPatientButtonText>Adicionar Médico</AddPatientButtonText>
-      </AddPatientButton>
+      <BottomButton onPress={() => navigation.navigate('Formularios Médicos')}>
+        Adicionar Médico(a)
+      </BottomButton>
     </>
   );
 };

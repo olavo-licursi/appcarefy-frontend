@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { KeyboardAvoidingView, Platform, FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import BottomButton from '../../components/BottomButton';
+
 
 import api from '../../services/api';
 
@@ -7,8 +10,6 @@ import Input from '../../components/Input';
 
 import {
   Container,
-  AddPatientButton,
-  AddPatientButtonText,
   ContainerList,
   PatientNameText,
 } from './styles';
@@ -16,11 +17,11 @@ import RemoveButtonList from '../../components/RemoveButtonList';
 import EditPersonButton from '../../components/EditPersonButton';
 
 const Appointment: React.FC = () => {
+  const navigation = useNavigation();
   const [appointments, setAppointments] = useState<any[]>([]);
 
   useEffect(() => {
     api.get('/appointments').then(response => {
-      console.log(response.data);
       setAppointments(response.data);
     });
   }, []);
@@ -43,7 +44,7 @@ const Appointment: React.FC = () => {
         enabled
       >
         <Container>
-          <Input name="search" icon="search" placeholder="Buscar" />
+          <Input name="search" placeholder="Buscar" />
 
           <FlatList
             data={appointments}
@@ -67,9 +68,9 @@ const Appointment: React.FC = () => {
         </Container>
       </KeyboardAvoidingView>
 
-      <AddPatientButton>
-        <AddPatientButtonText>Adicionar Agendamento</AddPatientButtonText>
-      </AddPatientButton>
+      <BottomButton onPress={() => navigation.navigate('Formularios Agendamentos')}>
+        Adicionar Agendamento
+      </BottomButton>
     </>
   );
 };
